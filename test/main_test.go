@@ -39,8 +39,19 @@ func TestMain(t *testing.T) {
 			assert.Equal(t, resp.Lead, input[i].Lead)
 			assert.Equal(t, resp.Content, input[i].Content)
 			assert.Equal(t, resp.ImageCoverURL, input[i].ImageCoverURL)
-			assert.Equal(t, resp.ImageCoverCaption, *input[i].ImageCoverCaption)
-			assert.Equal(t, resp.Status, *input[i].Status)
+
+			if input[i].ImageCoverCaption != nil {
+				assert.Equal(t, resp.ImageCoverCaption, *input[i].ImageCoverCaption)
+			} else {
+				assert.Equal(t, resp.ImageCoverCaption, "")
+			}
+
+			if input[i].Status != nil {
+				assert.Equal(t, resp.Status, *input[i].Status)
+			} else {
+				assert.Equal(t, resp.Status, "")
+			}
+
 			assert.Equal(t, resp.TagsDetail[0].ID, input[i].Tag1ID)
 			assert.Equal(t, resp.TagsDetail[0].Name, input[i].Tag1Name)
 			assert.Equal(t, resp.CategoryDetail.ID, input[i].CategoryDetailID)
